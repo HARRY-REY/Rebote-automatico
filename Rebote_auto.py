@@ -12,9 +12,9 @@ azul     = ( 0   , 0   , 200 )
 amarillo = ( 255 , 255 , 0   )
 
 # -VENTANA
-tamaño    = ancho,alto = 300,500            # Tamaño de la pantalla
-pantalla  = pygame.display.set_mode(tamaño) # Se cre una pantall con pygame con el tamaño prediseñado
-pygame.display.set_caption("Gravedad")      # Se le pone un nombre al borde de la pantalla
+tamaño    = ancho,alto = 300,500                # Tamaño de la pantalla
+pantalla  = pygame.display.set_mode(tamaño)     # Se cre una pantall con pygame con el tamaño prediseñado
+pygame.display.set_caption("Rebote automatico") # Se le pone un nombre al borde de la pantalla
 
 # -CLASES
 class Pelota:
@@ -40,10 +40,6 @@ balon = Pelota ( 150 , 20 , 20 , rojo)
 # -BUCLÉ 
 while True:
 
-    """
-    El efecto se efectua simpre que se presione la tecla,
-    cuando deja de ser presionada el movimiento es 0 
-    """
     for accion in pygame.event.get():
         # Si se presiona el boton 'X' salimos
         if accion.type == pygame.QUIT:
@@ -51,42 +47,15 @@ while True:
 
         # Si alguna tecla es presionada 
         elif accion.type == pygame.KEYDOWN:
-
-            if accion.key == pygame.K_DOWN:
+            # Si se presiona "ESPACIO" comenzara a moverse
+            if accion.key == pygame.K_SPACE:
                 movimiento_AB = 10
-                print("Tecla ABAJO presionada")
-                # Movimiento en el eje Y
-                balon.y += movimiento_AB
-            
-            elif accion.key == pygame.K_UP:
-                movimiento_AB = -10
-                print("Tecla ARRIBA presionada")
-                # Movimiento en el eje Y
-                balon.y += movimiento_AB
-
-            elif accion.key == pygame.K_LEFT:
-                movimiento_ID = -10
-                print("Tecla IZQUIERDA presionada")
-                # Movimiento en el eje Y
-                balon.x += movimiento_ID
-
-            elif accion.key == pygame.K_RIGHT:
                 movimiento_ID = 10
-                print("Tecla DERECHA presionada")
-                # Movimiento en el eje Y
-                balon.x += movimiento_ID
-        """
-        # Si alguna tecla se deja de presionar
-        elif accion.type == pygame.KEYUP:
-            if accion.key == pygame.K_DOWN:
+            # si se presiona "c" se detiene
+            if accion.key == pygame.K_c:
                 movimiento_AB = 0
-            if accion.key == pygame.K_UP:
-                movimiento_AB = 0
-            if accion.key == pygame.K_LEFT:
                 movimiento_ID = 0
-            if accion.key == pygame.K_RIGHT:
-                movimiento_ID = 0
-        """
+    
     # Muestra la pantalla con fondo de color
     pantalla.fill(blanco)
 
@@ -113,6 +82,7 @@ while True:
     # Condición para no rebasar el lado derecho 
     if balon.x >= ancho:
         movimiento_ID *= -1
+
     # Manejo de la pantalla
     pygame.display.update()
 
