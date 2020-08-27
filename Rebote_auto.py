@@ -1,6 +1,7 @@
 # !/usr/bin/env-python
 # -*- coding: utf-8 -*-
 
+from random import random,randint
 import pygame,sys
 
 # -COLORES
@@ -32,6 +33,7 @@ class Pelota:
 # -DATOS
 movimiento_AB = 0 # Movimiento de arriba - abajo
 movimiento_ID = 0 # Movimiento de izquierda - derecha
+movimiento    = randint(0,3)
 
 
 # -OBJETOS
@@ -39,6 +41,9 @@ balon = Pelota ( 150 , 20 , 20 , rojo)
 
 # -BUCLÉ 
 while True:
+
+    # Varibale aleatoria para el movimiento del objeto
+    movimiento    = randint(0,3)
 
     for accion in pygame.event.get():
         # Si se presiona el boton 'X' salimos
@@ -49,8 +54,28 @@ while True:
         elif accion.type == pygame.KEYDOWN:
             # Si se presiona "ESPACIO" comenzara a moverse
             if accion.key == pygame.K_SPACE:
-                movimiento_AB = 10
-                movimiento_ID = 10
+                # Movimientos de manera aleatoria
+
+                # ABAJO - DERECHA
+                if movimiento == 0:
+                    movimiento_AB = 10
+                    movimiento_ID = 10
+
+                # ABAJO - IZQUIERDA
+                if movimiento == 1:
+                    movimiento_AB = 10
+                    movimiento_ID =-10
+
+                # ARRIBA - DERECHA
+                if movimiento == 2:
+                    movimiento_AB =-10
+                    movimiento_ID = 10
+
+                # ARRIBA - IZQUIERDA
+                if movimiento == 3:
+                    movimiento_AB =-10
+                    movimiento_ID =-10
+
             # si se presiona "c" se detiene
             if accion.key == pygame.K_c:
                 movimiento_AB = 0
