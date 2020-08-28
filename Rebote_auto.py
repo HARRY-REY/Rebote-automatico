@@ -4,6 +4,8 @@
 from random import random,randint
 import pygame,sys
 
+pygame.init()
+
 # -COLORES
 negro    = ( 0   , 0   , 0   )
 blanco   = ( 255 , 255 , 255 )
@@ -31,10 +33,13 @@ class Pelota:
         pygame.draw.circle ( pantalla , self.color , (  self.x , self.y ) , self.radio , self.grosor )
 
 # -DATOS
-movimiento_AB = 0 # Movimiento de arriba - abajo
-movimiento_ID = 0 # Movimiento de izquierda - derecha
-movimiento    = randint(0,3)
-
+movimiento_AB         = 0                          # Movimiento de arriba - abajo
+movimiento_ID         = 0                          # Movimiento de izquierda - derecha
+fuente_predeterminada = pygame.font.Font(None, 30) # Fuente, tamaño de la fuente
+texto_inicio          = fuente_predeterminada.render("Presiona 'ESPACIO'",0,negro)
+texto_inicio_1        = fuente_predeterminada.render("para comenzar",0,negro)
+texto_inicio_2        = fuente_predeterminada.render("'c' para detener",0,negro)
+mostar_texto          = False                      # Condición para mostrar el texto
 
 # -OBJETOS
 balon = Pelota ( 150 , 20 , 20 , rojo)
@@ -44,6 +49,7 @@ while True:
 
     # Varibale aleatoria para el movimiento del objeto
     movimiento    = randint(0,3)
+
 
     for accion in pygame.event.get():
         # Si se presiona el boton 'X' salimos
@@ -83,6 +89,9 @@ while True:
     
     # Muestra la pantalla con fondo de color
     pantalla.fill(blanco)
+    pantalla.blit(texto_inicio  ,(20,150))
+    pantalla.blit(texto_inicio_1,(20,200))
+    pantalla.blit(texto_inicio_2,(20,250))
 
     # Movimiento en el eje Y
     balon.y += movimiento_AB
